@@ -1,0 +1,16 @@
+<mat-card class="chat-card">
+  <mat-card-content>ыоапыопаоылорррр
+    <mat-list>
+      <mat-list-item *ngFor="let msg of messages">
+        {{ msg }}
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Введите сообщение" [(ngModel)]="message" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="sendMessage()">Отправить</button>
+  </mat-card-actions>
+</mat-card>
+

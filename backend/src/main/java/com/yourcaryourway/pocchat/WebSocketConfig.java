@@ -19,7 +19,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // Регистрируем конечную точку для клиента (Angular)
-        registry.addEndpoint("/chat").setAllowedOrigins("*").withSockJS();
+        registry.addEndpoint("/chat")
+                .setAllowedOriginPatterns("http://localhost:4200")
+                .withSockJS();
     }
 
 }
