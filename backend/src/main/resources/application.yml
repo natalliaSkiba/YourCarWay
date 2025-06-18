@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/car
+    username: ad
+    password: 123
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc.time_zone: UTC
+        id.new_generator_mappings: true
+        id.optimizer: pooled-lo
+        id.generator_strategy_default: uuid2
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: true
+
+
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true

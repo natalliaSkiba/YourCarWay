@@ -1,0 +1,33 @@
+<mat-card class="chat-card">
+  <mat-card-title>Client Chat</mat-card-title>
+
+  <mat-card-content class="chat-content">
+    <div *ngFor="let msg of messages" class="message-row" [ngClass]="msg.from">
+      <div class="chat-bubble">
+        <strong>{{ msg.from }}:</strong> {{ msg.content }}
+        <div class="bubble-time">{{ msg.timestamp | date:'shortTime' }}</div>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions class="chat-actions">
+    <mat-form-field appearance="outline" class="chat-input">
+      <input
+        matInput
+        [(ngModel)]="message"
+        placeholder="Type a message..."
+        (keydown.enter)="sendMessage()"
+        aria-label="Type a message"
+      />
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="sendMessage()"
+      aria-label="Send message"
+    >
+      Send
+    </button>
+  </mat-card-actions>
+</mat-card>

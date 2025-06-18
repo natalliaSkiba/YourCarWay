@@ -1,8 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter } from '@angular/router';
-import { ChatComponent } from './app/chat/chat.component';
-import { routes } from './app/app.routes';
+import { AppComponent } from './app/app.component';
 
-bootstrapApplication(ChatComponent, {
-  providers: [provideRouter(routes)]
-});
+bootstrapApplication(AppComponent)
+  .catch(err => console.error(err));
