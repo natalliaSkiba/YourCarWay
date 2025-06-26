@@ -6,20 +6,33 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+/**
+ * WebSocket configuration using the STOMP protocol.
+ * Configures the message broker and registers endpoints for client connections.
+ */
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+
+    /**
+     * Configures the message broker with a simple in-memory broker on the "/topic" prefix.
+     * Messages sent with the "/app" prefix will be routed to controller methods.
+     */
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        // Конфигурация брокера сообщений
-        config.enableSimpleBroker("/topic"); // Канал рассылки сообщений
-        config.setApplicationDestinationPrefixes("/app"); // Префикс для сообщений от клиента
+        config.enableSimpleBroker("/topic");
+        config.setApplicationDestinationPrefixes("/app");
     }
 
+    /**
+     * Registers the "/chat" endpoint for WebSocket clients,
+     * allowing cross-origin requests from "http://localhost:4200" and enabling SockJS fallback options.
+     */
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        // Регистрируем конечную точку для клиента (Angular)
-        registry.addEndpoint("/chat").setAllowedOrigins("*").withSockJS();
+        registry.addEndpoint("/chat")
+                .setAllowedOriginPatterns("http://localhost:4200")
+                .withSockJS();
     }
 
 }
